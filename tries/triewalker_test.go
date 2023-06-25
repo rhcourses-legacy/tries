@@ -41,9 +41,9 @@ func TestTrieWalker_Step(t *testing.T) {
 	trie.Insert("abc")
 	walker := NewTrieWalker(trie)
 
-	a := trie.root.children['a']
-	b := a.children['b']
-	c := b.children['c']
+	a := trie.root.Get("a")
+	b := trie.root.Get("ab")
+	c := trie.root.Get("abc")
 
 	if !walker.Step('a') {
 		t.Error("Step should return true for rune 'a'")
