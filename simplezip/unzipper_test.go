@@ -44,6 +44,21 @@ func TestUnzipper_AdvanceSingleChar(t *testing.T) {
 	}
 }
 
+// TestUnzipper_InsertCurrentData tests the InsertCurrentData function.
+// It creates a new unzipper with a non-empty string and a trie with data.
+// It advances the unzipper to the data node and calls InsertCurrentData.
+// It checks whether the result is correct.
+func TestUnzipper_InsertCurrentData(t *testing.T) {
+	trie := tries.NewTrie()
+	trie.Insert("1", "abc")
+	uz := NewUnzipper("1", trie)
+	uz.tw.Step('1')
+	uz.InsertCurrentData()
+	if uz.Result() != "abc" {
+		t.Errorf("Result should be \"%v\", but is \"%v\".", "abc", uz.Result())
+	}
+}
+
 // TestUnzipper_Run_clean tests the Run function.
 // It creates a new unzipper with a string, calls Run, and checks whether the result is correct.
 // In this test case, every single character is the code for a string in the dictionary.

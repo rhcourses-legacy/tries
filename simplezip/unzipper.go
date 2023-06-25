@@ -1,6 +1,8 @@
 package simplezip
 
 import (
+	"fmt"
+
 	"github.com/rhcourses/tries/tries"
 )
 
@@ -44,6 +46,21 @@ func (uz *Unzipper) AdvanceSingleChar() {
 	uz.position++
 }
 
+// InsertCurrentData inserts the data of the current node into the result.
+// If the current node has no data, it does nothing
+// Returns true if data has been inserted.
+//
+// This function neither queries the trie nor advances the unzipper.
+// It is meant to be used while unzipping a string after the trie walker has moved.
+func (uz *Unzipper) InsertCurrentData() bool {
+	data := uz.tw.Data()
+	if len(data) != 0 {
+		uz.result += fmt.Sprintf("%v", data[0])
+		return true
+	}
+	return false
+}
+
 // Run decompresses the string.
 func (uz *Unzipper) Run() {
 	for !uz.Done() {
@@ -52,10 +69,7 @@ func (uz *Unzipper) Run() {
 			uz.AdvanceSingleChar()
 			continue
 		}
-		data := uz.tw.Data()
-		if len(data) != 0 {
-			uz.result += data[0].(string)
-		} else {
+		if !uz.InsertCurrentData() {
 			uz.result += uz.compressed[uz.position : uz.position+consumed]
 		}
 		uz.tw.Reset()
