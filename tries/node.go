@@ -2,10 +2,10 @@ package tries
 
 // Node is a trie node.
 // It contains data and a map of children nodes.
-//   - data is a slice of strings because a node's data in our examples is a list of words.
+//   - data is a slice of any. Usually, we will be using strings, but there is no reason to restrict the data type.
 //   - children is a map of runes to nodes because we traverse the trie by reading characters from a string.
 type Node struct {
-	data     []string
+	data     []any
 	children map[rune]*Node
 }
 
@@ -43,7 +43,7 @@ func (n *Node) GetOrCreateChild(r rune) *Node {
 // Insert expects a string and inserts it into the trie.
 // It optinally expects data strings that will be added to the node.
 // If the node already exists, the data strings are appended to the node's data.
-func (n *Node) Insert(s string, data ...string) {
+func (n *Node) Insert(s string, data ...any) {
 	current := n
 	for _, r := range s {
 		current = current.GetOrCreateChild(r)

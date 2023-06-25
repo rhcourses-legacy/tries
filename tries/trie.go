@@ -27,13 +27,13 @@ func (t *Trie) IsValid() bool {
 // Insert expects a string and inserts it into the trie.
 // It optinally expects data strings that will be added to the node.
 // If the node already exists, the data strings are appended to the node's data.
-func (t *Trie) Insert(s string, data ...string) {
+func (t *Trie) Insert(s string, data ...any) {
 	t.root.Insert(s, data...)
 }
 
 // GetData expects a string and returns the corresponding data.
 // If the node does not exist, it returns nil.
-func (t *Trie) GetData(s string) []string {
+func (t *Trie) GetData(s string) []any {
 	if node := t.root.Get(s); node != nil {
 		return node.data
 	}

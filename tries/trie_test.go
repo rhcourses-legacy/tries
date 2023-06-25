@@ -52,7 +52,7 @@ func TestTrie_Insert_data(t *testing.T) {
 	trie := NewTrie()
 	trie.Insert("abc", "data1", "data2")
 
-	expecteddata := []string{"data1", "data2"}
+	expecteddata := []any{"data1", "data2"}
 	actualdata := trie.GetData("abc")
 	if !reflect.DeepEqual(actualdata, expecteddata) {
 		t.Errorf("Data should be %v, but is %v", expecteddata, actualdata)

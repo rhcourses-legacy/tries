@@ -134,7 +134,7 @@ func TestNode_Insert(t *testing.T) {
 	if c.IsEmpty() {
 		t.Errorf("Node %v should not be empty", c)
 	}
-	expectedData := []string{"data1", "data2"}
+	expectedData := []any{"data1", "data2"}
 	actualData := c.data
 	if !reflect.DeepEqual(actualData, expectedData) {
 		t.Errorf("Node %v should contain data %v, but contains %v", c, expectedData, actualData)
