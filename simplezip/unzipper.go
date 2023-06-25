@@ -67,7 +67,6 @@ func (uz *Unzipper) InsertCurrentData() bool {
 // It is meant to be used while unzipping a string when the trie walker has not moved.
 func (uz *Unzipper) CopyChars(n int) {
 	uz.result += uz.compressed[uz.position : uz.position+n]
-	uz.position += n
 }
 
 // Run decompresses the string.
@@ -79,7 +78,7 @@ func (uz *Unzipper) Run() {
 			continue
 		}
 		if !uz.InsertCurrentData() {
-			uz.result += uz.compressed[uz.position : uz.position+consumed]
+			uz.CopyChars(consumed)
 		}
 		uz.tw.Reset()
 		uz.position += consumed
