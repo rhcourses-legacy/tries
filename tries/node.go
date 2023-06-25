@@ -50,3 +50,15 @@ func (n *Node) Insert(s string, data ...string) {
 	}
 	current.data = append(current.data, data...)
 }
+
+// Get expects a string and returns the corresponding node.
+// If the node does not exist, it returns nil.
+func (n *Node) Get(s string) *Node {
+	current := n
+	for _, r := range s {
+		if current = current.children[r]; current == nil {
+			return nil
+		}
+	}
+	return current
+}

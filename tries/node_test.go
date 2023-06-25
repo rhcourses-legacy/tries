@@ -140,3 +140,37 @@ func TestNode_Insert(t *testing.T) {
 		t.Errorf("Node %v should contain data %v, but contains %v", c, expectedData, actualData)
 	}
 }
+
+// TestNode_Get tests the Get function.
+// It creates a new node and inserts two nodes at different paths.
+// Then it checks whether the Get function returns the correct nodes.
+func TestNode_Get(t *testing.T) {
+	root := NewNode()
+
+	root.Insert("abc", "data1", "data2")
+	root.Insert("abd", "data3", "data4")
+
+	// Check whether the Get function returns the correct nodes.
+	expectedNodes := map[string]*Node{
+		"abc": root.children['a'].children['b'].children['c'],
+		"abd": root.children['a'].children['b'].children['d'],
+	}
+	for s, expectedNode := range expectedNodes {
+		actualNode := root.Get(s)
+		if actualNode != expectedNode {
+			t.Errorf("Node for string %v should be %v, but is %v", s, expectedNode, actualNode)
+		}
+	}
+}
+
+// TestNode_Get_nil tests the Get function.
+// It creates a new node and asks for a node that does not exist.
+// It checks whether the Get function returns nil.
+func TestNode_Get_nil(t *testing.T) {
+	root := NewNode()
+
+	actualNode := root.Get("abc")
+	if actualNode != nil {
+		t.Errorf("Node for string %v should be nil, but is %v", "abc", actualNode)
+	}
+}
