@@ -23,3 +23,10 @@ func (t *Trie) IsEmpty() bool {
 func (t *Trie) IsValid() bool {
 	return t.root != nil && t.root.IsValid()
 }
+
+// Insert expects a string and inserts it into the trie.
+// It optinally expects data strings that will be added to the node.
+// If the node already exists, the data strings are appended to the node's data.
+func (t *Trie) Insert(s string, data ...string) {
+	t.root.Insert(s, data...)
+}
