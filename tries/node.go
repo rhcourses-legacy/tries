@@ -39,3 +39,14 @@ func (n *Node) GetOrCreateChild(r rune) *Node {
 	}
 	return n.children[r]
 }
+
+// Insert expects a string and inserts it into the trie.
+// It optinally expects data strings that will be added to the node.
+// If the node already exists, the data strings are appended to the node's data.
+func (n *Node) Insert(s string, data ...string) {
+	current := n
+	for _, r := range s {
+		current = current.GetOrCreateChild(r)
+	}
+	current.data = append(current.data, data...)
+}
