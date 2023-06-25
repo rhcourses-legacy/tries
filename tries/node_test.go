@@ -29,12 +29,12 @@ func TestNode_New_IsValid(t *testing.T) {
 	}
 }
 
-// TestNode_GetOrCreateChild tests the GetOrCreateChild function.
+// TestNode_GetOrCreateChild_properties tests the GetOrCreateChild function.
 // It creates a new node and uses GetOrCreateChild to create child nodes.
 //   - During creation, it checks whether each created node is a valid empty leaf.
 //   - After all child nodes are created, it checks whether the last node is still a leaf,
 //     but the others are not. All nodes must still be valid and empty.
-func TestNode_GetOrCreateChild(t *testing.T) {
+func TestNode_GetOrCreateChild_properties(t *testing.T) {
 	root := NewNode()
 
 	current := root
