@@ -30,3 +30,12 @@ func (t *Trie) IsValid() bool {
 func (t *Trie) Insert(s string, data ...string) {
 	t.root.Insert(s, data...)
 }
+
+// GetData expects a string and returns the corresponding data.
+// If the node does not exist, it returns nil.
+func (t *Trie) GetData(s string) []string {
+	if node := t.root.Get(s); node != nil {
+		return node.data
+	}
+	return nil
+}
