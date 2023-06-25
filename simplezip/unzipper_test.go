@@ -33,6 +33,17 @@ func TestUnzipper_New_result(t *testing.T) {
 	}
 }
 
+// TestUnzipper_AdvanceSingleChar tests the AdvanceSingleChar function.
+// It creates a new unzipper with a non-empty string, advances it by one character,
+// and checks whether the result is correct.
+func TestUnzipper_AdvanceSingleChar(t *testing.T) {
+	uz := NewUnzipper("abc", tries.NewTrie())
+	uz.AdvanceSingleChar()
+	if uz.Result() != "a" {
+		t.Error("Result should be \"a\"")
+	}
+}
+
 // TestUnzipper_Run_clean tests the Run function.
 // It creates a new unzipper with a string, calls Run, and checks whether the result is correct.
 // In this test case, every single character is the code for a string in the dictionary.
