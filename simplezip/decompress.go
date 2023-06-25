@@ -14,6 +14,11 @@ func Decompress(compressedString string, trie *tries.Trie) string {
 
 	for len(compressedString) > 0 {
 		consumed := tw.Walk(compressedString)
+		if consumed == 0 {
+			result += string(compressedString[0])
+			compressedString = compressedString[1:]
+			continue
+		}
 		data := tw.Data()
 		if len(data) != 0 {
 			result += fmt.Sprintf("%v", data[0])

@@ -23,3 +23,20 @@ func TestDecompress_clean(t *testing.T) {
 		t.Errorf("Decompressed string should be \"%s\", but is \"%s\"", original, decompressed)
 	}
 }
+
+// TestDecompress_dirty tests the Decompress function.
+// It unpacks a compressed string where the codes are mixed with other characters
+// that do not have to be unpacked and should be copied to the decompressed string.
+func TestDecompress_dirty(t *testing.T) {
+	original := "aaabbbcccaaabbbcccaaabbbccc"
+	compressed := "12ccc12ccc12ccc"
+
+	trie := tries.NewTrie()
+	trie.Insert("1", "aaa")
+	trie.Insert("2", "bbb")
+
+	decompressed := Decompress(compressed, trie)
+	if decompressed != original {
+		t.Errorf("Decompressed string should be \"%s\", but is \"%s\"", original, decompressed)
+	}
+}
