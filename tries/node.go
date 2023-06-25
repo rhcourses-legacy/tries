@@ -31,3 +31,11 @@ func (n *Node) IsValid() bool {
 	return n.children != nil
 }
 
+// GetOrCreateChild expects a rune and returns the corresponding child node.
+// If the child node does not exist, it is created.
+func (n *Node) GetOrCreateChild(r rune) *Node {
+	if _, exists := n.children[r]; !exists {
+		n.children[r] = NewNode()
+	}
+	return n.children[r]
+}
