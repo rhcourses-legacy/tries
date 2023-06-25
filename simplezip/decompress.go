@@ -22,6 +22,8 @@ func Decompress(compressedString string, trie *tries.Trie) string {
 		data := tw.Data()
 		if len(data) != 0 {
 			result += fmt.Sprintf("%v", data[0])
+		} else {
+			result += compressedString[:consumed]
 		}
 		tw.Reset()
 		compressedString = compressedString[consumed:]
