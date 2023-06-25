@@ -59,6 +59,20 @@ func TestUnzipper_InsertCurrentData(t *testing.T) {
 	}
 }
 
+// TestUnzipper_CopyChars tests the CopyChars function.
+// It creates a new unzipper with a non-empty string and a trie with a node but without data.
+// It advances the unzipper to the data node and calls CopyChars.
+// It checks whether the result is correct.
+func TestUnzipper_CopyChars(t *testing.T) {
+	trie := tries.NewTrie()
+	uz := NewUnzipper("abc", trie)
+	uz.CopyChars(2)
+	expected := "ab"
+	if uz.Result() != expected {
+		t.Errorf("Result should be \"%v\", but is \"%v\".", expected, uz.Result())
+	}
+}
+
 // TestUnzipper_Run_clean tests the Run function.
 // It creates a new unzipper with a string, calls Run, and checks whether the result is correct.
 // In this test case, every single character is the code for a string in the dictionary.

@@ -61,6 +61,15 @@ func (uz *Unzipper) InsertCurrentData() bool {
 	return false
 }
 
+// CopyChars expects a number of characters and copies them to from the compressed string to the result.
+//
+// This function neither queries the trie nor advances the unzipper.
+// It is meant to be used while unzipping a string when the trie walker has not moved.
+func (uz *Unzipper) CopyChars(n int) {
+	uz.result += uz.compressed[uz.position : uz.position+n]
+	uz.position += n
+}
+
 // Run decompresses the string.
 func (uz *Unzipper) Run() {
 	for !uz.Done() {
