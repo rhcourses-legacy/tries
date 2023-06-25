@@ -1,0 +1,18 @@
+= Anwendungsbeispiele
+
+* Predictive Text bzw. Autocompletion:
+  ** Nutze den Trie als Wörterbuch mit Vorschlägen für die Texteingabe z.B. im Smartphone.
+  ** An jedem Knoten wird die Liste der Wörter gespeichert, die für die bisherige
+     Eingabe vorgeschlagen werden sollen.
+* Kompression:
+  ** Beim Komprimieren eines Textes werden lange Wörter, die häufig vorkommen, durch
+     kurze Codes ersetzt.
+  ** Die Codes werden in einem Trie gespeichert, in den Knoten wird dann zu jedem
+     Code das ursprüngliche Wort gespeichert.
+* Suche in Texten:
+  ** Zur effiziente Suche nach Wörtern in einem Text wird der Text vorverarbeitet.
+     Häufig vorkommende Muster werden identifiziert und in einem Trie gespeichert.
+  ** In den Knoten des Tries wird dann gespeichert, an welchen Stellen im Text das
+     Muster vorkommt.
+  ** Der Vorverarbeitungsschritt kann auch im Laufe der Zeit wiederholt werden,
+     z.B. um den Trie um häufig gesuchte Begriffe zu ergänzen.
