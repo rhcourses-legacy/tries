@@ -76,3 +76,17 @@ func TestNode_GetOrCreateChild(t *testing.T) {
 		t.Errorf("Node %v should be a leaf", c)
 	}
 }
+
+// TestNode_GetOrCreateChild_noduplicates tests the GetOrCreateChild function.
+// It creates a new node and uses GetOrCreateChild twice to get the same child node.
+// It checks whether the child node is created only once.
+func TestNode_GetOrCreateChild_noduplicates(t *testing.T) {
+	root := NewNode()
+
+	child1 := root.GetOrCreateChild('a')
+	child2 := root.GetOrCreateChild('a')
+
+	if child1 != child2 {
+		t.Error("Child nodes should be the same")
+	}
+}
