@@ -19,3 +19,13 @@ func TestNode_New_IsEmpty(t *testing.T) {
 		t.Error("New node should be empty")
 	}
 }
+
+// TestNode_New_IsValid tests the NewNode function.
+// It creates a new node and checks whether it is valid.
+func TestNode_New_IsValid(t *testing.T) {
+	n := NewNode()
+	if !n.IsValid() {
+		t.Error("New node should be valid")
+	}
+}
+

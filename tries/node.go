@@ -25,3 +25,9 @@ func (n *Node) IsLeaf() bool {
 func (n *Node) IsEmpty() bool {
 	return len(n.data) == 0
 }
+
+// IsValid returns true if the node contains a valid children map.
+func (n *Node) IsValid() bool {
+	return n.children != nil
+}
+
