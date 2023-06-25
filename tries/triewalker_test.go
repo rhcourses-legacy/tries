@@ -70,3 +70,59 @@ func TestTrieWalker_Step(t *testing.T) {
 		t.Error("Step should not move walker past leaf node")
 	}
 }
+
+// TestTrieWalker_Walk_match tests the Walk function.
+// It creates a new trie walker, adds a node to the trie, and walks a string that matches the node.
+// It checks the following:
+//   - The Walk function returns the correct number of consumed runes.
+//   - The Walk function moves the walker to the correct node.
+func TestTrieWalker_Walk_match(t *testing.T) {
+	trie := NewTrie()
+	trie.Insert("abc")
+	walker := NewTrieWalker(trie)
+
+	if n := walker.Walk("abc"); n != 3 {
+		t.Errorf("Walk should consume 3 runes, but consumed %d", n)
+	}
+	if walker.current != trie.root.Get("abc") {
+		t.Error("Walk should move walker to correct node")
+	}
+}
+
+// TestTrieWalker_Walk_walkpast tests the Walk function.
+// It creates a new trie walker, adds a node to the trie, and walks a string that
+// hits a node but would walk past it.
+// It checks the following:
+//   - The Walk function returns the correct number of consumed runes.
+//   - The Walk function moves the walker to the inserted node.
+func TestTrieWalker_Walk_walkpast(t *testing.T) {
+	trie := NewTrie()
+	trie.Insert("abc")
+	walker := NewTrieWalker(trie)
+
+	if n := walker.Walk("abcd"); n != 3 {
+		t.Errorf("Walk should consume 3 runes, but consumed %d", n)
+	}
+	if walker.current != trie.root.Get("abc") {
+		t.Error("Walk should move walker to correct node")
+	}
+}
+
+// TestTrieWalker_Walk_short tests the Walk function.
+// It creates a new trie walker, adds a node to the trie, and walks a string that
+// is shorter than the one corresponding to the node.
+// It checks the following:
+//   - The Walk function returns the correct number of consumed runes.
+//   - The Walk function moves the walker to the correct inner node.
+func TestTrieWalker_Walk_short(t *testing.T) {
+	trie := NewTrie()
+	trie.Insert("abc")
+	walker := NewTrieWalker(trie)
+
+	if n := walker.Walk("ab"); n != 2 {
+		t.Errorf("Walk should consume 2 runes, but consumed %d", n)
+	}
+	if walker.current != trie.root.Get("ab") {
+		t.Error("Walk should move walker to correct node")
+	}
+}

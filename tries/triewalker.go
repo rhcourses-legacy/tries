@@ -37,3 +37,17 @@ func (tw *TrieWalker) Step(r rune) bool {
 	tw.current = next
 	return true
 }
+
+// Walk expects a string and moves the walker until either of the following:
+//   - the walker is at a leaf node
+//   - the walker is at the end of the string
+//
+// Returns the number of runes that were consumed.
+func (tw *TrieWalker) Walk(s string) int {
+	for i, r := range s {
+		if !tw.Step(r) {
+			return i
+		}
+	}
+	return len(s)
+}
