@@ -25,3 +25,15 @@ func (tw *TrieWalker) IsAtRoot() bool {
 func (tw *TrieWalker) IsAtLeaf() bool {
 	return tw.current.IsLeaf()
 }
+
+// Step expects a rune and moves the walker to the corresponding child node.
+// If the child node does not exist, it returns false and does not move the walker.
+// Returns true if the step was successful.
+func (tw *TrieWalker) Step(r rune) bool {
+	next := tw.current.children[r]
+	if next == nil {
+		return false
+	}
+	tw.current = next
+	return true
+}
