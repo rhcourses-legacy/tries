@@ -145,3 +145,19 @@ func TestTrieWalker_Walk_nomatch(t *testing.T) {
 		t.Error("Walk should move walker to correct node")
 	}
 }
+
+// TestTrieWalker_Reset tests the Reset function.
+// It creates a new trie walker, adds a node to the trie, walks to that node, and resets the walker.
+// It checks whether the walker is at the root node.
+func TestTrieWalker_Reset(t *testing.T) {
+	trie := NewTrie()
+	trie.Insert("abc")
+	walker := NewTrieWalker(trie)
+
+	walker.Walk("abc")
+	walker.Reset()
+
+	if !walker.IsAtRoot() {
+		t.Error("Reset should move walker to root node")
+	}
+}

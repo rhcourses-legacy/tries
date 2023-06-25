@@ -21,6 +21,11 @@ func (tw *TrieWalker) IsAtRoot() bool {
 	return tw.current == tw.trie.root
 }
 
+// Reset moves the walker to the root node.
+func (tw *TrieWalker) Reset() {
+	tw.current = tw.trie.root
+}
+
 // IsAtLeaf returns true if the walker is at a leaf node.
 func (tw *TrieWalker) IsAtLeaf() bool {
 	return tw.current.IsLeaf()
