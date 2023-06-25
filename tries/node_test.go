@@ -60,7 +60,7 @@ func TestNode_GetOrCreateChild_properties(t *testing.T) {
 	c := b.children['c']
 
 	// Check validity and emptiness.
-	for _, node := range []*Node{a, b, c} {
+	for _, node := range []*Node{root, a, b, c} {
 		if !node.IsValid() {
 			t.Errorf("Node %v should be valid", node)
 		}
@@ -70,7 +70,7 @@ func TestNode_GetOrCreateChild_properties(t *testing.T) {
 	}
 
 	// Check leaf property.
-	for _, node := range []*Node{a, b} {
+	for _, node := range []*Node{root, a, b} {
 		if node.IsLeaf() {
 			t.Errorf("Node %v should not be a leaf", node)
 		}
@@ -111,7 +111,7 @@ func TestNode_Insert(t *testing.T) {
 	d := b.children['d']
 
 	// Check validity and emptiness.
-	for _, node := range []*Node{a, b, c, d} {
+	for _, node := range []*Node{root, a, b, c, d} {
 		if !node.IsValid() {
 			t.Errorf("Node %v should be valid", node)
 		}
@@ -124,9 +124,9 @@ func TestNode_Insert(t *testing.T) {
 	root.Insert("abc", "data1", "data2")
 
 	// Check emptiness.
-	// a, b, and d should still be empty.
+	// root, a, b, and d should still be empty.
 	// c should contain the data and not be empty.
-	for _, node := range []*Node{a, b, d} {
+	for _, node := range []*Node{root, a, b, d} {
 		if !node.IsEmpty() {
 			t.Errorf("Node %v should be empty", node)
 		}
