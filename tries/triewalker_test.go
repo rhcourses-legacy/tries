@@ -126,3 +126,22 @@ func TestTrieWalker_Walk_short(t *testing.T) {
 		t.Error("Walk should move walker to correct node")
 	}
 }
+
+// TestTrieWalker_Walk_nomatch tests the Walk function.
+// It creates a new trie walker, adds a node to the trie, and walks a string that
+// corresponds to a sibling of the node that is not in the trie.
+// It checks the following:
+//   - The Walk function returns the correct number of consumed runes.
+//   - The Walk function moves the walker to the common parent node.
+func TestTrieWalker_Walk_nomatch(t *testing.T) {
+	trie := NewTrie()
+	trie.Insert("abc")
+	walker := NewTrieWalker(trie)
+
+	if n := walker.Walk("abd"); n != 2 {
+		t.Errorf("Walk should consume 2 runes, but consumed %d", n)
+	}
+	if walker.current != trie.root.Get("ab") {
+		t.Error("Walk should move walker to correct node")
+	}
+}
