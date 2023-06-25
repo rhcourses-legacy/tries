@@ -16,7 +16,7 @@ func NewTrie() *Trie {
 
 // IsEmpty returns true if the trie is empty.
 func (t *Trie) IsEmpty() bool {
-	return t.root.IsEmpty()
+	return t.root.IsLeaf()
 }
 
 // IsValid returns true if the trie contains a valid root node.
