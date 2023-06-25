@@ -20,3 +20,8 @@ func NewTrieWalker(trie *Trie) *TrieWalker {
 func (tw *TrieWalker) IsAtRoot() bool {
 	return tw.current == tw.trie.root
 }
+
+// IsAtLeaf returns true if the walker is at a leaf node.
+func (tw *TrieWalker) IsAtLeaf() bool {
+	return tw.current.IsLeaf()
+}
