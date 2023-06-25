@@ -56,3 +56,8 @@ func (tw *TrieWalker) Walk(s string) int {
 	}
 	return len(s)
 }
+
+// Data returns the data of the current node.
+func (tw *TrieWalker) Data() []any {
+	return tw.current.data
+}

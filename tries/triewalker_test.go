@@ -1,6 +1,9 @@
 package tries
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 // TestTrieWalker_New_Empty tests the NewTrieWalker function.
 // It creates a trie walker with an empty trie and checks whether it is both at the root and at a leaf.
@@ -159,5 +162,21 @@ func TestTrieWalker_Reset(t *testing.T) {
 
 	if !walker.IsAtRoot() {
 		t.Error("Reset should move walker to root node")
+	}
+}
+
+// TestTrieWalker_Data tests the Data function.
+// It creates a new trie walker, adds a node to the trie, and walks to that node.
+// It checks whether the walker returns the correct data.
+func TestTrieWalker_Data(t *testing.T) {
+	trie := NewTrie()
+	trie.Insert("abc", "data1", "data2")
+	walker := NewTrieWalker(trie)
+
+	walker.Walk("abc")
+
+	expectedData := []any{"data1", "data2"}
+	if actualData := walker.Data(); !reflect.DeepEqual(actualData, expectedData) {
+		t.Errorf("Data should return %v, but returned %v", expectedData, actualData)
 	}
 }
